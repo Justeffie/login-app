@@ -1,0 +1,38 @@
+<div class="inner-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-4">
+        <form action="" class="form-group" style="margin-top: 30px" [formGroup]="formulario" (ngSubmit)="onSubmit(f)" #f="ngForm" >
+          <label for="username" style="margin-top: 5px">Usuario</label>
+          <input type="text" id="username" class="form-control" formControlName="username">
+          <div *ngIf="formulario.get('username').errors?.required && formulario.get('username').touched">
+            <span class="help-block">El usuario es requerido</span>
+          </div>
+          <label for="password" style="margin-top: 5px">Contraseña</label>
+          <input type="password" id="password" class="form-control" formControlName="password" (change)="checkInputs('pass', $event)">
+          <div *ngIf="formulario.get('password').errors?.required && formulario.get('password').touched">
+            <span class="help-block">La contraseña es requerida</span>
+          </div>
+          <div *ngIf="formulario.get('password').errors?.minlength && formulario.get('password').touched">
+            <span class="help-block">La contraseña debe tener más de 5 caracteres</span>
+          </div>
+          <div *ngIf="formulario.get('password').valid">
+            <label for="pass" style="margin-top: 5px">Repetir contraseña</label>
+            <input type="password" id="pass" class="form-control" formControlName="pass" (change)="checkInputs('password', $event)">
+            <div *ngIf="formulario.get('pass').errors?.required && formulario.get('pass').touched">
+              <span class="help-block">La contraseña es requerida</span>
+            </div>
+            <div *ngIf="formulario.get('pass').errors?.minlength && formulario.get('pass').touched">
+              <span class="help-block">La contraseña debe tener más de 5 caracteres</span>
+            </div>
+            <div *ngIf="formulario.get('pass').errors?.passwordNotEqual && formulario.get('pass').touched">
+              <span class="help-block">Las contraseñas deben coincidir</span>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="margin-top: 20px">Guardar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
